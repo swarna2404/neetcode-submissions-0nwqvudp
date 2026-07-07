@@ -1,0 +1,22 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        int left=0;
+        int right=nums.length-1;
+        while(left<=right){
+            int mid=(left+right)/2;
+            if(nums[mid]==target)return mid;
+            //check if left is sorted
+            if(nums[left]<=nums[mid]){
+                //check if target lies in the range
+                if(nums[left]<=target && nums[mid]>=target)right=mid-1;
+                else left=mid+1;
+            }
+            //right half is sorted
+            else{
+                if(nums[mid]<=target && nums[right]>=target)left=mid+1;
+                else right=mid-1;
+            }
+        }
+        return -1;
+    }
+}
